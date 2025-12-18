@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="src/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.37/moment-timezone-with-data-1970-2030.min.js"></script>
     <title>City Time Selector</title>
   </head>
   <body>
@@ -13,22 +15,23 @@
         <option value="">Choose a city...</option>
         <option value="Europe/Paris">Paris 🇫🇷</option>
         <option value="Asia/Tokyo">Tokyo 🇯🇵</option>
-        <option value="Australia/Sydney">Sydney 🇦🇺</option>
+        <option value="Australia/Sydney">New York 🇺🇸</option>
       </select>
 
       <div class="city">
         <div class="city-info">
           <h2>Los Angeles 🇺🇸</h2>
-          <div class="date">August 15th 2022</div>
+          <div class="date" id="la-date"></div>
         </div>
-        <div class="time">1:48:15 AM</div>
+        <div class="time" id="la-time"></div>
       </div>
+
       <div class="city">
         <div class="city-info">
           <h2>Sydney 🇦🇺</h2>
-          <div class="date">August 15th 2022</div>
+          <div class="date" id="sydney-date"></div>
         </div>
-        <div class="time">1:48:15 AM</div>
+        <div class="time" id="sydney-time"></div>
       </div>
     </div>
 

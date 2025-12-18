@@ -1,6 +1,7 @@
 let currentTimezone = "";
 let currentCityLabel = "";
 let intervalId = null;
+const allCitiesLink = document.getElementById("allCitiesLink");
 
 function updateDefaultCities() {
   let laTime = moment().tz("America/Los_Angeles");
@@ -12,6 +13,12 @@ function updateDefaultCities() {
     sydneyTime.format("MMMM Do YYYY");
   document.querySelector("#sydney-time").innerHTML =
     sydneyTime.format("h:mm:ss A");
+
+  let viennaTime = moment().tz("Europe/Vienna");
+  document.querySelector("#aut-date").innerHTML =
+    viennaTime.format("MMMM Do YYYY");
+  document.querySelector("#aut-time").innerHTML =
+    viennaTime.format("h:mm:ss A");
 }
 
 function updateSelectedCity() {
@@ -24,7 +31,6 @@ function updateSelectedCity() {
   document.querySelector(".city-info h2").innerHTML = currentCityLabel;
 }
 
-// Initial: Beide Städte anzeigen - ACHTUNG: intervalId verwenden!
 updateDefaultCities();
 intervalId = setInterval(updateDefaultCities, 1000);
 
@@ -33,16 +39,18 @@ const citySelector = document.getElementById("citySelector");
 citySelector.addEventListener("change", function () {
   const timezone = this.value;
 
-  // Stoppe IMMER zuerst alle laufenden Intervals!
   if (intervalId) {
     clearInterval(intervalId);
     intervalId = null;
   }
 
   if (!timezone) {
-    // Zurück zu LA + Sydney
+    // Zurück zu LA + Sydney + Vienna
     document.querySelectorAll(".city")[0].style.display = "flex";
     document.querySelectorAll(".city")[1].style.display = "flex";
+    document.querySelectorAll(".city")[2].style.display = "flex";
+
+    allCitiesLink.classList.remove("show");
 
     updateDefaultCities();
     intervalId = setInterval(updateDefaultCities, 1000);
@@ -57,13 +65,15 @@ citySelector.addEventListener("change", function () {
 
     document.querySelectorAll(".city")[0].style.display = "flex";
     document.querySelectorAll(".city")[1].style.display = "none";
+    document.querySelectorAll(".city")[2].style.display = "none";
+
+    allCitiesLink.classList.add("show");
 
     updateSelectedCity();
     intervalId = setInterval(updateSelectedCity, 1000);
     return;
   }
 
-  // Normale Städte
   currentTimezone = timezone;
 
   if (timezone === "Europe/Paris") {
@@ -76,7 +86,16 @@ citySelector.addEventListener("change", function () {
 
   document.querySelectorAll(".city")[0].style.display = "flex";
   document.querySelectorAll(".city")[1].style.display = "none";
+  document.querySelectorAll(".city")[2].style.display = "none";
+
+  allCitiesLink.classList.add("show");
 
   updateSelectedCity();
   intervalId = setInterval(updateSelectedCity, 1000);
+});
+
+// All Cities Link Handler
+allCitiesLink.addEventListener("click", function (e) {
+  e.preventDefault();
+  location.reload();
 });

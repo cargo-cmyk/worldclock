@@ -97,3 +97,20 @@ footer {
   margin-top: 30px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
+.all-cities-link {
+  font-size: 16px;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: none; /* ← Initial versteckt! */
+}
+
+.all-cities-link.show {
+  display: inline-block; /* ← Wird sichtbar mit class "show" */
+}
+
+.all-cities-link:hover {
+  background: rgba(255, 255, 255, 0.3);
+}

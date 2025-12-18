@@ -3,53 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
     <title>City Time Selector</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        margin: 0;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      }
-
-      .container {
-        background: white;
-        padding: 40px;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        text-align: center;
-      }
-
-      h1 {
-        color: #333;
-        margin-bottom: 20px;
-        font-size: 24px;
-      }
-
-      select {
-        padding: 12px 20px;
-        font-size: 16px;
-        border: 2px solid #667eea;
-        border-radius: 8px;
-        cursor: pointer;
-        background: white;
-        min-width: 250px;
-        transition: all 0.3s ease;
-      }
-
-      select:hover {
-        border-color: #764ba2;
-      }
-
-      select:focus {
-        outline: none;
-        border-color: #764ba2;
-        box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.1);
-      }
-    </style>
   </head>
   <body>
     <div class="container">
@@ -61,31 +16,12 @@
         <option value="Australia/Sydney">Sydney 🇦🇺</option>
       </select>
     </div>
-
-    <script>
-      const citySelector = document.getElementById("citySelector");
-
-      citySelector.addEventListener("change", function () {
-        const timezone = this.value;
-
-        if (timezone) {
-          const now = new Date();
-
-          const options = {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            hour: "numeric",
-            minute: "2-digit",
-            timeZone: timezone,
-          };
-
-          const formattedDate = now.toLocaleString("en-US", options);
-
-          alert(`It is ${formattedDate} in ${timezone}`);
-        }
-      });
-    </script>
+    <footer>
+      This project was coded with ❤️ by Caro Codes and is
+      <a href="https://github.com/cargo-cmyk/worldclock" target="_blank">
+        open sourced on GitHub</a
+      >
+    </footer>
+    <script src="javascript/index.js"></script>
   </body>
 </html>

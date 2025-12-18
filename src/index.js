@@ -80,8 +80,8 @@ citySelector.addEventListener("change", function () {
     currentCityLabel = "Paris 🇫🇷";
   } else if (timezone === "Asia/Tokyo") {
     currentCityLabel = "Tokyo 🇯🇵";
-  } else if (timezone === "Australia/Sydney") {
-    currentCityLabel = "Sydney 🇦🇺";
+  } else if (timezone === "America/New_York") {
+    currentCityLabel = "New York 🇺🇸";
   }
 
   document.querySelectorAll(".city")[0].style.display = "flex";

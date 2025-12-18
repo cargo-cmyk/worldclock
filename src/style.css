@@ -16,6 +16,50 @@ body {
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.city {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+  padding: 30px 0;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
+}
+
+.city:last-child {
+  border: none;
+}
+
+.city-info {
+  text-align: left;
+}
+
+.city h2 {
+  margin: 0 0 5px 0;
+  font-size: 24px;
+}
+
+.date {
+  opacity: 0.7;
+  font-size: 14px;
+  margin: 0;
+}
+
+.time {
+  font-size: 40px;
+  font-weight: bold;
+  text-align: right;
+  margin-left: 80px;
+}
+
+.time small {
+  font-size: 24px;
+  vertical-align: middle;
+  line-height: 48px;
 }
 
 h1 {
@@ -44,6 +88,7 @@ select:focus {
   border-color: #764ba2;
   box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.1);
 }
+
 footer {
   background: white;
   padding: 20px;

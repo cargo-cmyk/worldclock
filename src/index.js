@@ -3,12 +3,10 @@ let currentCityLabel = "";
 let intervalId = null;
 
 function updateDefaultCities() {
-  // Los Angeles
   let laTime = moment().tz("America/Los_Angeles");
   document.querySelector("#la-date").innerHTML = laTime.format("MMMM Do YYYY");
   document.querySelector("#la-time").innerHTML = laTime.format("h:mm:ss A");
 
-  // Sydney
   let sydneyTime = moment().tz("Australia/Sydney");
   document.querySelector("#sydney-date").innerHTML =
     sydneyTime.format("MMMM Do YYYY");
@@ -26,26 +24,46 @@ function updateSelectedCity() {
   document.querySelector(".city-info h2").innerHTML = currentCityLabel;
 }
 
+// Initial: Beide Städte anzeigen - ACHTUNG: intervalId verwenden!
 updateDefaultCities();
-setInterval(updateDefaultCities, 1000);
+intervalId = setInterval(updateDefaultCities, 1000);
 
 const citySelector = document.getElementById("citySelector");
 
 citySelector.addEventListener("change", function () {
   const timezone = this.value;
 
+  // Stoppe IMMER zuerst alle laufenden Intervals!
+  if (intervalId) {
+    clearInterval(intervalId);
+    intervalId = null;
+  }
+
   if (!timezone) {
+    // Zurück zu LA + Sydney
     document.querySelectorAll(".city")[0].style.display = "flex";
     document.querySelectorAll(".city")[1].style.display = "flex";
 
-    if (intervalId) clearInterval(intervalId);
-    intervalId = null;
-
     updateDefaultCities();
-    setInterval(updateDefaultCities, 1000);
+    intervalId = setInterval(updateDefaultCities, 1000);
     return;
   }
 
+  if (timezone === "current") {
+    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+    currentTimezone = userTimezone;
+    currentCityLabel = `Current Location 📍`;
+
+    document.querySelectorAll(".city")[0].style.display = "flex";
+    document.querySelectorAll(".city")[1].style.display = "none";
+
+    updateSelectedCity();
+    intervalId = setInterval(updateSelectedCity, 1000);
+    return;
+  }
+
+  // Normale Städte
   currentTimezone = timezone;
 
   if (timezone === "Europe/Paris") {
@@ -54,13 +72,10 @@ citySelector.addEventListener("change", function () {
     currentCityLabel = "Tokyo 🇯🇵";
   } else if (timezone === "Australia/Sydney") {
     currentCityLabel = "Sydney 🇦🇺";
-    currentTimezone = "Australia/Sydney";
   }
 
   document.querySelectorAll(".city")[0].style.display = "flex";
   document.querySelectorAll(".city")[1].style.display = "none";
-
-  if (intervalId) clearInterval(intervalId);
 
   updateSelectedCity();
   intervalId = setInterval(updateSelectedCity, 1000);
